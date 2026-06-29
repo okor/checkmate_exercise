@@ -6,7 +6,7 @@ RUN apt-get update -qq && \
       libsqlite3-dev \
     && rm -rf /var/lib/apt/lists/*
 
-WORKDIR /rails
+WORKDIR /app
 
 COPY Gemfile Gemfile.lock ./
 RUN bundle install
