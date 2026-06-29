@@ -1,0 +1,7 @@
+.git
+.dockerignore
+log/
+tmp/
+storage/
+node_modules/
+.bundle/
