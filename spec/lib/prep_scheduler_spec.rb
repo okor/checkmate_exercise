@@ -15,6 +15,5 @@ RSpec.describe PrepScheduler do
       schedule = PrepScheduler.new(items).schedule
       expect(schedule).to eq([180, 135])
     end
-
   end
 end
