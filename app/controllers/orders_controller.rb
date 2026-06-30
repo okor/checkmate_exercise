@@ -12,13 +12,12 @@ class OrdersController < ApplicationController
     discount = (subtotal >= 2000 ? subtotal * 0.1 : 0).round
     total = subtotal - discount
     prep_schedule = PrepScheduler.new(items).schedule
-    estimated_prep_seconds = prep_schedule[0]
 
     return render json: { 
       subtotal_cents: subtotal,
       discount_cents: discount,
       total_cents: total,
-      estimated_prep_seconds: estimated_prep_seconds,
+      estimated_prep_seconds: prep_schedule[0],
       prep_schedule: [
         [1, prep_schedule[0]],
         [2, prep_schedule[1]]
