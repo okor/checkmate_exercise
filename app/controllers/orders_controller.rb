@@ -4,7 +4,6 @@ class OrdersController < ApplicationController
   def create
     items = order_params[:items]
     
-    return render json: { error: "items cannot be blank" }, status: :bad_request if items.blank?
     return render json: { error: "qty must be a positive integer"}, status: :bad_request if items.any? { |item| item[:qty].to_i < 1 }
     return render json: { error: "item_id not found"}, status: :bad_request if items.any? { |item| PrepScheduler::MENU[item[:item_id].to_i].nil? }
 
