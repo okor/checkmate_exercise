@@ -13,7 +13,7 @@ class OrdersController < ApplicationController
     return render json: { error: "items cannot be blank" }, status: :bad_request if items.blank?
     return render json: { error: "qty must be a positive integer"}, status: :bad_request if items.any? { |item| item[:qty].to_i < 1 }
     return render json: { error: "item_id must not be blank"}, status: :bad_request if items.any? { |item| item[:item_id].blank? }
-    return render json: { error: "item_id not found"}, status: :bad_request if items.any? { |item| item[:item_id].to_i > 5 }
+    return render json: { error: "item_id not found"}, status: :bad_request if items.any? { |item| MENU[item[:item_id].to_i].nil? }
 
     subtotal = items.sum { |item| MENU[item[:item_id].to_i][:price_cents] * item[:qty].to_i }
     discount = (subtotal > 2000 ? subtotal * 0.1 : 0).round
