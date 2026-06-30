@@ -19,6 +19,6 @@ class PrepScheduler
       prep_schedule[0] += MENU[item[:item_id].to_i][:prep_seconds] * item[:qty].to_i
     end
 
-    prep_schedule = prep_schedule.sort.reverse
+    prep_schedule.sort.reverse
   end
 end
