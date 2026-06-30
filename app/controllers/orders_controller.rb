@@ -17,19 +17,17 @@ class OrdersController < ApplicationController
     subtotal = items.sum { |item| MENU[item[:item_id].to_i][:price_cents] * item[:qty].to_i }
     discount = (subtotal > 2000 ? subtotal * 0.1 : 0).round
     total = subtotal - discount
-    estimated_prep_seconds = items.sum { |item| MENU[item[:item_id].to_i][:prep_seconds]  * item[:qty].to_i }
 
     prep_schedule = [0, 0]
 
     items.each do |item|
-      qty = item[:qty].to_i
-      qty.times do
-        prep_schedule = prep_schedule.sort
-        prep_schedule[0] += MENU[item[:item_id].to_i][:prep_seconds]
-      end
+      prep_schedule = prep_schedule.sort
+      prep_schedule[0] += MENU[item[:item_id].to_i][:prep_seconds] * item[:qty].to_i
     end
 
     prep_schedule = prep_schedule.sort.reverse
+
+    estimated_prep_seconds = prep_schedule[0]
 
     return render json: { 
       subtotal_cents: subtotal,
