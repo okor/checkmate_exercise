@@ -1,19 +1,23 @@
 # Build the app (once)
-docker compose build --no-cache
+`docker compose build --no-cache`
 
 # Run the app
-docker compose up
+`docker compose up`
+
+# Send a test payload
+`curl -X POST http://localhost:3000/orders   -H "Content-Type: application/json"   -d '{"items":[{"item_id":1,"qty":2},{"item_id":2,"qty":1},{"item_id":3,"qty":1}]}`
 
 # Run tests
-docker compose run --no-deps web bundle exec rspec
+`docker compose run --no-deps web bundle exec rspec`
 
 # Get a rails console
-docker compose run --no-deps web bundle exec rails console
+`docker compose run --no-deps web bundle exec rails console`
 
 # Get a bash shell
-docker compose run --no-deps web bash
+`docker compose run --no-deps web bash`
 
 
+---
 ---
 
 

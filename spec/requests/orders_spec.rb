@@ -43,5 +43,10 @@ RSpec.describe "Orders", type: :request do
       post "/orders", params: { items: [{ item_id: 99, qty: 1 }] }, as: :json
       expect(response).to have_http_status(:bad_request)
     end
+
+    it "returns 400 when item_id is a string" do
+      post "/orders", params: { items: [{ item_id: "gibberish", qty: 1 }] }, as: :json
+      expect(response).to have_http_status(:bad_request)
+    end
   end
 end
